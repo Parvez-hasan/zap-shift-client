@@ -9,7 +9,7 @@ const Navbar = () => {
   const handleLogOut = () => {
     logOut()
     .then( result => {
-      console.log(result.user);
+      console.log(result);
       
       alert('account logOut success')
     })
@@ -23,8 +23,15 @@ const Navbar = () => {
     
      <li><NavLink to="">Services</NavLink> </li>
      <li><NavLink to="">Services</NavLink> </li>
+     <li><NavLink to="/send-parcel">Send parcel</NavLink> </li>
      <li><NavLink to="/CovarRage">CovarRage</NavLink> </li>
      <li><NavLink to="/aboutUs">About Us</NavLink> </li>
+
+     {
+      user && <>
+      <li><NavLink to="/dashboard/my-parcels">My Parcels</NavLink> </li>
+      </>
+     }
      
      </>
   return (
@@ -67,7 +74,7 @@ const Navbar = () => {
         </div>
         <div className="navbar-end">
 
-           <Link to='/' className="btn btn-primary mx-4 text-black">Be a Rider</Link>
+           <Link to='/rider' className="btn btn-primary mx-4 text-black">Be a Rider</Link>
          
         {
           user ?  <a onClick={handleLogOut} className="btn bg-red-500 text-white">LogOut</a> : <Link to='/login' className="btn">Login</Link>

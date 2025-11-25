@@ -1,12 +1,17 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import UseAuth from '../../../Hooks/UseAuth';
-import { Link } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import SocialLogin from '../SocialLogin/SocialLogin';
 
 const Login = () => {
     const {register, handleSubmit, formState: {errors}} = useForm();
     const {signInUser} = UseAuth()
+
+    const location = useLocation()
+    const navigate = useNavigate()
+   // console.log('in the login page', location);
+    
 
     const handleLogin = (data) => {
         console.log('form data' , data);
@@ -14,6 +19,8 @@ const Login = () => {
         signInUser(data.email, data.password)
         .then(result => {
             console.log(result.user);
+
+            navigate(location?.state || '/')
             
         })
         .then(error => {
@@ -46,7 +53,9 @@ const Login = () => {
           <div><a className="link link-hover">Forgot password?</a></div>
           <button className="btn btn-neutral mt-4">Login</button>
         </fieldset>
-        <p>New to zap shift <Link to={'/register'} className='text-blue-700'>Register</Link></p>
+        <p>New to zap shift <Link 
+        state={location.state}
+        to={'/register'} className='text-blue-700'>Register</Link></p>
       </form>
       <SocialLogin></SocialLogin>
     </div>

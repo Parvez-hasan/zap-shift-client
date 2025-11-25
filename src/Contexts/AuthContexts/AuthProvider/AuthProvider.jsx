@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { AuthContext } from '../AuthContexts';
-import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
+import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 import { auth } from '../../../Firebase/Firebase.config';
 
 const googleProvider = new GoogleAuthProvider()
@@ -32,6 +32,12 @@ const logOut = () => {
     return signOut(auth)
 }
 
+// update user profie
+const updateUserProfile = (profile) => {
+    return updateProfile(auth.currentUser, profile)
+
+}
+
 // observe user state 
 useEffect(()=>{
     const unSubscribe = onAuthStateChanged(auth, (currentUser) =>{
@@ -51,7 +57,8 @@ useEffect(()=>{
       registerUser,
       signInUser,
       signInGoogle,
-      logOut
+      logOut,
+      updateUserProfile
     }
 
     return (
