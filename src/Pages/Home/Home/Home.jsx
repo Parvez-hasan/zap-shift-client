@@ -7,7 +7,7 @@ import Delivery from '../Delivery/Delivery';
 import Reviews from '../Reviews/Reviews';
 import HeroBanner from '../HeroBaaner/HeroBanner';
 
-const reviewsPromiss = fetch('reviews.json').then(res => res.json());
+const reviewsPromiss = fetch('./reviews.json').then(res => res.json());
 
 const Home = () => {
     return (
